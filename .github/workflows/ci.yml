@@ -33,3 +33,22 @@ jobs:
           name: planstudy-waitlist-${{ github.sha }}
           path: index.html
           retention-days: 7
+
+  e2e:
+    name: End-to-end (headless Chrome)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install test harness
+        run: npm ci
+
+      - name: Exercise every component
+        run: npm test
+        env:
+          CHROME_PATH: /usr/bin/google-chrome

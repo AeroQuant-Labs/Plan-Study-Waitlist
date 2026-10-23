@@ -43,6 +43,8 @@ Any receiver that accepts that shape works (Formspree, a Google Apps Script web 
 | --- | --- |
 | `index.html` | The entire site — the only file that ships |
 | `scripts/check.mjs` | Zero-dependency gatekeeper run by CI |
+| `tests/e2e.mjs` | End-to-end suite that drives headless Chrome (`npm test`) |
+| `package.json` | Test-harness scripts and devDependency (the site itself has none) |
 | `.github/workflows/ci.yml` | Runs the gate on every push and pull request |
 | `.github/workflows/deploy.yml` | Publishes `main` to GitHub Pages |
 
@@ -72,6 +74,28 @@ feature/<short-name>  ──PR──▶  develop  ──PR──▶  main  (tagg
 It also **warns** (without failing) while `WAITLIST_ENDPOINT` is still empty.
 
 Run it locally with any Node ≥ 18: `node scripts/check.mjs`.
+
+## End-to-end tests
+
+`tests/e2e.mjs` serves the page exactly like production (localhost HTTP) and drives **real headless Chrome** through every interactive component — 29 checks in total:
+
+- hero entrance settles and the ambient loops are actually running (marquee, FAB ripple, pill dot, headline sheen, stage glow)
+- the phone demo auto-cycles the week, hands control over when a day is clicked, and repaints class rows
+- both waitlist forms reject invalid emails and save valid sign-ups in demo mode
+- the teaser video autoplays muted + looped with no controls when it reaches the viewport
+- every section reveals on scroll; the offline bar fills to 68%; the FAQ opens
+- the builder adds courses via button **and** Enter, honours colour swatches, clears its inputs
+- the reading-progress bar reaches full at the bottom and resets at the top
+- true 390 px mobile: no sideways panning (verified with a real touch gesture), tab taps work, form usable
+- reduced-motion visitors get animations off, no progress bar, a frozen day cycle, and content visible immediately
+- zero JS/console errors and **zero external network requests** (offline-safe proof)
+
+```bash
+npm ci
+npm test          # needs Chrome; override the binary with CHROME_PATH=/path/to/chrome
+```
+
+CI runs the suite as the `e2e` job on every push and pull request, next to the static `page-gate`.
 
 ## Deployment
 

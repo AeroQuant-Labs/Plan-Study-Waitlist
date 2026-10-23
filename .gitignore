@@ -7,6 +7,5 @@ Desktop.ini
 .vscode/
 .idea/
 
-# Node (only used by scripts/check.mjs — no dependencies, but just in case)
+# Node (dev tooling for tests/e2e.mjs only — the site itself has no deps)
 node_modules/
-package-lock.json
