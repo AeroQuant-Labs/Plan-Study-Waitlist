@@ -75,9 +75,17 @@ Run it locally with any Node ≥ 18: `node scripts/check.mjs`.
 
 ## Deployment
 
-Pushes to `main` run the gate, then publish to **GitHub Pages** through GitHub Actions (`deploy.yml`). A manual run is available via *Actions → Deploy to GitHub Pages → Run workflow*.
+The site publishes to **GitHub Pages** through GitHub Actions (`deploy.yml`), gated by the same page-contract checks as CI.
 
-> The repository must allow Pages deployments (Settings → Pages → Source: *GitHub Actions*).
+**Current status:** this repository is **private on the Free plan**, which cannot publish Pages. The deploy workflow therefore runs **on demand**: *Actions → Deploy to GitHub Pages → Run workflow*.
+
+To go live:
+
+1. Make the repository public (Settings → General → *Change visibility*), **or** upgrade the organisation plan.
+2. Settings → Pages → Source: **GitHub Actions**.
+3. Re-enable the automatic push trigger in `.github/workflows/deploy.yml` (see the comment at the top of the file).
+
+The site will then be served at `https://aerquant-labs.github.io/Plan-Study-Waitlist/`.
 
 ## Releases
 
