@@ -1,8 +1,14 @@
 name: Deploy to GitHub Pages
 
+# On demand only while the repository cannot publish Pages (private repo on
+# the Free plan). Once Pages is enabled (public repo, or paid plan — then set
+# Settings → Pages → Source: GitHub Actions), restore the automatic trigger:
+#
+#   on:
+#     push:
+#       branches: [main]
+#     workflow_dispatch:
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
