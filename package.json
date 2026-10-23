@@ -1,0 +1,13 @@
+{
+  "name": "planstudy-waitlist",
+  "version": "1.1.2",
+  "private": true,
+  "description": "PlanStudy waitlist landing page — one self-contained HTML file, gated by scripts/check.mjs and exercised end-to-end by tests/e2e.mjs.",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "node tests/e2e.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.20.0"
+  }
+}

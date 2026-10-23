@@ -53,6 +53,7 @@ else ok("fully self-contained (no external assets)");
 const required = [
   ["title", () => /<title>[^<]{3,}<\/title>/i.test(html)],
   ["meta viewport", () => /<meta[^>]+name=["']viewport["']/i.test(html)],
+  ["inline favicon (no /favicon.ico 404)", () => /<link[^>]+rel=["']icon["']\s+href=["']data:/i.test(html)],
   ["exactly one <h1>", () => (html.match(/<h1[\s>]/g) || []).length === 1],
   ["waitlist form (.wl-form)", () => /<form[^>]*class=["'][^"']*\bwl-form\b/i.test(html)],
   ["endpoint hook (WAITLIST_ENDPOINT)", () => /const\s+WAITLIST_ENDPOINT/.test(html)],
