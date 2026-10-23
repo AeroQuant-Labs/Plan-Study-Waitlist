@@ -1,0 +1,12 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Node (only used by scripts/check.mjs — no dependencies, but just in case)
+node_modules/
+package-lock.json
