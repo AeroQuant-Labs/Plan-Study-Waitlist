@@ -82,14 +82,14 @@ const anim = await page.evaluate(() => {
     marquee: track ? g(track).animationName + "/" + g(track).animationPlayState : "missing",
     fab: g(document.querySelector(".fab"), "::before").animationName,
     dot: g(document.querySelector(".hero .pill"), "::before").animationName,
-    sheen: g(document.querySelector("h1 em")).animationName,
+    words: g(document.querySelector(".hero h1 .wi")).animationName,
     glow: g(document.querySelector(".stage"), "::before").animationName,
   };
 });
-check("ambient loops alive (marquee, fab ripple, pill dot, headline sheen, stage glow)",
+check("ambient loops alive (marquee, fab ripple, pill dot, headline words, stage glow)",
   anim.marquee !== "none" && anim.marquee.includes("running") &&
   anim.fab === "ripple" && anim.dot === "blip" &&
-  anim.sheen === "sheen" && anim.glow === "glow",
+  anim.words === "wordUp" && anim.glow === "glow",
   JSON.stringify(anim));
 
 // 3. (image decode is checked after the reveal sweep below — the .oldway
@@ -286,14 +286,14 @@ wire(rm, "reduced");
 await rm.goto(BASE, { waitUntil: "load", timeout: 60000 });
 await sleep(500);
 const r1 = await rm.evaluate(() => ({
-  h1anim: getComputedStyle(document.querySelector(".hero h1")).animationName,
+  h1anim: getComputedStyle(document.querySelector(".hero h1 .wi")).animationName,
   progress: getComputedStyle(document.querySelector(".progress")).display,
   day: document.querySelector('#heroTabs .tab[aria-selected="true"]')?.dataset.d,
   revealOp: getComputedStyle(document.querySelector(".reveal")).opacity,
 }));
 await sleep(3900);
 const r2day = await rm.evaluate(() => document.querySelector('#heroTabs .tab[aria-selected="true"]')?.dataset.d);
-check("reduced-motion: entrance animations off", r1.h1anim === "none", `h1 animation=${r1.h1anim}`);
+check("reduced-motion: entrance animations off", r1.h1anim === "none", `h1 words animation=${r1.h1anim}`);
 check("reduced-motion: progress bar hidden", r1.progress === "none");
 check("reduced-motion: content visible immediately", r1.revealOp === "1", `reveal opacity ${r1.revealOp}`);
 check("reduced-motion: day auto-cycle frozen", r1.day === r2day, `${r1.day} → ${r2day}`);
