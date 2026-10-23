@@ -15,6 +15,7 @@ The waitlist landing page for **PlanStudy** — an AI study planner that turns a
 - **Hero** — headline, waitlist form, and a hands-on phone demo that auto-cycles through the week (Mon–Fri) until a visitor clicks a day; the demo uses the six-subject pilot schedule (DCIT 101, MATH 121, UGRC 150, STAT 111, DCIT 103, MATH 123).
 - **Teaser video** — muted, looping, no controls; it plays inline as soon as it is on screen.
 - **Problem → plan** — "Most students plan on scraps of paper" section and a four-step How-it-works.
+- **Feature tour** — a timetable spotlight card (flagship, launching first) plus AI day-by-day planning, deadline and exam radar, offline-first, and cross-device.
 - **Timetable builder demo** — add a course code, name, time and colour; rows appear in the phone live.
 - **Offline-first** — today's plan card with a progress bar that fills as you scroll to it.
 - **FAQ** and a final waitlist CTA.
@@ -79,7 +80,7 @@ Run it locally with any Node ≥ 18: `node scripts/check.mjs`.
 
 `tests/e2e.mjs` serves the page exactly like production (localhost HTTP) and drives **real headless Chrome** through every interactive component — 29 checks in total:
 
-- hero entrance settles and the ambient loops are actually running (marquee, FAB ripple, pill dot, headline sheen, stage glow)
+- hero entrance settles (word-by-word, full colour) and the ambient loops are actually running (marquee, FAB ripple, pill dot, stage glow)
 - the phone demo auto-cycles the week, hands control over when a day is clicked, and repaints class rows
 - both waitlist forms reject invalid emails and save valid sign-ups in demo mode
 - the teaser video autoplays muted + looped with no controls when it reaches the viewport
