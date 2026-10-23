@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop, "feature/**"]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  page-gate:
+    name: Page gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check the page contract
+        run: node scripts/check.mjs
+
+      - name: Upload validated page
+        uses: actions/upload-artifact@v4
+        with:
+          name: planstudy-waitlist-${{ github.sha }}
+          path: index.html
+          retention-days: 7
