@@ -19,6 +19,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{font-family:var(--font);background:var(--bg);color:var(--navy);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+main{overflow-x:clip} /* hero art bleeds past the viewport; clip it at the page edge so narrow screens never scroll sideways */
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 .wrap{width:min(1120px,100% - 40px);margin-inline:auto}

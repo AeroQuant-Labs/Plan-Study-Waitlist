@@ -256,7 +256,7 @@ wire(mob, "mobile");
 await mob.goto(BASE, { waitUntil: "load", timeout: 60000 });
 await sleep(1200);
 const vw = await mob.evaluate(() => ({ iw: innerWidth, sw: document.documentElement.scrollWidth }));
-check("mobile 390px: viewport is really 390", vw.iw === 390, `innerWidth ${vw.iw} (content spills to ${vw.sw}, must be clipped)`);
+check("mobile 390px: no horizontal overflow (viewport and content width match)", vw.iw === 390 && vw.sw === 390, `innerWidth ${vw.iw}, scrollWidth ${vw.sw}`);
 // real user gesture: a horizontal finger swipe must not pan the page
 // (programmatic scrollTo bypasses the user-input restriction, so it lies)
 await mob.touchscreen.touchStart(330, 500);
